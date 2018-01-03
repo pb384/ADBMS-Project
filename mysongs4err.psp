@@ -1,0 +1,14 @@
+<HTML>
+<HEAD>
+<TITLE> SONG INFORMATION SYSTEM </TITLE>
+</HEAD>
+
+<BODY>
+<font face="verdana" color=#990012> No such Artist or Genre. Please enter valid Artist or Genre </font>
+<p>
+<FORM METHOD=POST ACTION="mysongs">
+<INPUT TYPE=SUBMIT VALUE="Back">
+</FORM>
+
+<BODY>
+<HTML>

@@ -1,0 +1,96 @@
+<%@ page language="PL/SQL" %>
+<%@ plsql procedure="mysongs" %>
+
+<%! x VARCHAR2(4) := '1945'; %>
+
+
+<HTML>
+<HEAD>
+<TITLE> SONG INFORMATION SYSTEM </TITLE>
+</HEAD>
+<BODY>
+
+<Table width="100%">
+<TR><TD BGCOLOR=#FBB117 align=center valign=center><font face="verdana" size=5 color=green><B> SONG INFORMATION SYSTEM</B></font> </TD></TR></TABLE>
+
+<font face="verdana" color=green>Name: Preeti Boddupally</font>
+<br>
+<font face="verdana" color=green>UCID: pb384</font>
+<br>
+<font face="verdana" color=green>New UserName: CS632S85001</font>
+
+<P>
+
+<FORM face="verdana" color=green METHOD=POST ACTION="mysongs1">
+<TABLE BORDER=0 width="50%">
+<TR><TH  BGCOLOR="728C00"><font face="verdana" color="FFFFFF"><b>FORM: 1</b></font></TH></TR>
+ <TR>
+   <TD>
+       <TABLE BORDER=0>
+            <TR>
+	       <TD><font face="verdana" color="green">YEAR:</font></TD>
+	       <TD><select face="verdana" color="green" name="yearlist">
+	      <% for i in 0..70
+	         loop
+	         x := x + 1; %>
+		 <option face="verdana" color="green" ><%= x %></option>
+		 <% end loop; %>
+		 </select></TD>
+	    </TR>
+	    <TR>
+	       <TD><font face="verdana" color="green" >SELECT:</font></TD>
+	       <TD><select face="verdana" color="green" name="aselection">
+	       <option >Artist</option>
+	       <option >Song</option>
+	       <option >Artist and Song</option>
+	       </select></TD>
+	    </TR>
+	</TABLE>
+    </TD>
+  </TR>
+  <TR><TD><input type="submit" value="SUBMIT"></TD></TR>
+</TABLE>  
+</FORM>
+
+<p>
+
+<FORM METHOD=POST ACTION="mysongs2">
+<TABLE BORDER=0 width="50%">
+ <TR>
+   <TH BGCOLOR="728C00"><font face="verdana" color="FFFFFF"><b>FORM: 2</font></TH></TR>
+ <TR>
+   <TD><font face="verdana" color=green>Artist</font></TD></TR>
+ <TR>
+   <TD><INPUT Type=text size=50 name="artistselect"></TD></TR>
+ <TR>
+  <TD><INPUT type="submit" value="SUBMIT"></TD></TR>
+</TABLE> 
+</FORM>
+
+<p>
+
+<FORM METHOD=POST ACTION="mysongs4">
+<TABLE BORDER=0 width="50%">
+ <TR>
+    <TH BGCOLOR="728C00"><font face="verdana" color="FFFFFF"><b>FORM: 3</font></TH></TR>
+<TR>
+  <TD>
+    <TABLE BORDER=0>
+     <TR>
+       <TD><font face="verdana" color=green>Artist</font></TD>
+       <TD><font face="verdana" color=green>Genre</font></TD>
+     </TR>
+     <TR>
+       <TD><INPUT Type=text size=50 name="artsel"></TD>
+       <TD><INPUT Type=text size=50 name="gensel"></TD>
+     </TR>
+     </TABLE>
+   </TD>
+ </TR>
+ <TR>
+  <TD><INPUT type="submit" value="SUBMIT"></TD>
+ </TR>
+ </TABLE>
+ </FORM>
+ </BODY>
+ </HTML>

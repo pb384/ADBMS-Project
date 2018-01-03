@@ -1,0 +1,61 @@
+<%@ page language="PL/SQL" %>
+<%@ plsql procedure="mysongs4" %>
+<%@ plsql parameter="artsel" type="varchar2" %>
+<%@ plsql parameter="gensel" type="varchar2" %>
+
+<%! P number := 0; %>
+<%! SGENRE varchar2(100); %>
+<%! SARTIST varchar2(100); %>
+<%! CURSOR DP is select * from GENRES where GENRE = gensel or ARTISTNAME = artsel; %>
+<% open DP;
+   fetch DP into SGENRE, SARTIST;
+   if DP%notfound 
+   then %>
+   <meta http-equiv ="refresh"
+   content="0;url=http://prophet.njit.edu:7780/CS632S852_001/mysongs4err"/>
+   <% end if;
+   close DP; %>
+
+<HTML>
+<HEAD>
+<TITLE> SONG INFORMATION SYSTEM </TITLE>
+</HEAD>
+
+<BODY>
+<font face="verdana" color=green>Name: Preeti Boddupally</font>
+<br>
+<font face="verdana" color=green>UCID: pb384</font>
+<br>
+<font face="verdana" color=green>New UserName: CS632S85001</font>
+<p>
+
+<TABLE>
+<% for C in DP
+   loop
+   if artsel = C.ARTISTNAME AND gensel IS NULL
+   then %>
+   <TR><TD><font face="verdana" color=green><%= C.GENRE %></font></TD></TR>
+  <% end if;
+  if gensel = C.GENRE AND artsel IS NULL
+  then %>
+  <% P := P+1; %>
+  <TR><TD><font face="verdana" color=green><%= P %></font></TD>
+  <TD><font face="verdana" color=green><%= C.ARTISTNAME %></font></TD></TR>
+  <% end if;
+  if artsel = C.ARTISTNAME AND gensel = C.GENRE
+   then %>
+      <font face="verdana" color=Green size=30>OK</font>
+  <% end if;
+  if artsel = C.ARTISTNAME AND gensel != C.GENRE
+  then %>
+      <font face="verdana" color=Red size=30>X</font>
+<% end if; 
+end loop; %>
+</TABLE>
+<p>
+<FORM METHOD=POST ACTION="mysongs">
+<INPUT TYPE=SUBMIT VALUE="Back">
+</FORM>
+
+</BODY>
+</HTML>

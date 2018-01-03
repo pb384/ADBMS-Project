@@ -1,0 +1,77 @@
+<%@ page language="PL/SQL" %>
+<%@ plsql procedure="mysongs1" %>
+<%@ plsql parameter="yearlist" type="varchar2" %>
+<%@ plsql parameter="aselection" type="varchar2" %>
+
+<%! CURSOR thomas IS 
+	SELECT * FROM HITSONGS
+	WHERE YEAR = yearlist; %>
+
+<HTML>
+<HEAD>
+<TITLE> SONG INFORMATION SYSTEM </TITLE>
+</HEAD>
+
+<BODY>
+<font face="verdana" color=green>Name: Preeti Boddupally</font>
+<br>
+<font face="verdana" color=green>UCID: pb384</font>
+<br>
+<font face="verdana" color=green>New UserName: CS632S85001</font>
+<p>
+<TABLE>
+ <TR>
+ <TH BGCOLOR="728C00"><font face="verdana" color=#FFFFFF><B>Below the HIT <font color=#FBB117><%= aselection %></font> in <font color=#FBB117><%= yearlist %></font></B></font></TH>
+ </TR>
+<% if aselection = 'Artist'
+   then %>
+   <% FOR x IN thomas
+   LOOP %>
+ <TR>
+  <TABLE>
+  <TR>
+   <TD><font face="verdana" color=#990012>Artist: </font></TD> 
+   <TD><font face="verdana" color=#990012><%= x.HITARTIST %> </font></TD>
+  </TR>
+  </TABLE>
+ </TR>
+   <% END LOOP; %>
+<% elsif aselection = 'Song'
+   then
+   for x in thomas
+   loop %>
+ <TR>
+  <TABLE>
+    <TR>
+  <TD><font face="verdana" color=#990012>Song: </font></TD>
+  <TD><font face="verdana" color=#990012><%= x.HITSONG %> </font></TD>
+    </TR>
+  </TABLE>
+ </TR> 
+   <% end loop; %>
+<% else
+   for x in thomas
+   loop %>
+ <TR>  
+  <TABLE>
+   <TR>
+    <TD><font face="verdana" color=#990012>Artist: </FONT></TD>
+    <TD><font face="verdana" color=#990012><%= x.HITARTIST %></font></TD>
+   </TR>
+   <TR>
+    <TD><font face="verdana" color=#990012>Song: </FONT></TD>
+    <TD><font face="verdana" color=#990012><%= x.HITSONG %></font></TD>
+   </TR>
+  </TABLE>
+ </TR> 
+   <% end loop; %>
+<% end if; %>
+</TABLE>
+
+<FORM METHOD=POST ACTION="mysongs">
+<INPUT TYPE=SUBMIT VALUE="Back">
+</FORM>
+
+<!--<a href="mysongs">mysongs</a>-->
+</BODY>
+</HTML>

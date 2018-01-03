@@ -1,0 +1,67 @@
+<%@ page language="PL/SQL" %>
+<%@ plsql procedure="mysongs2" %>
+<%@ plsql parameter="artistselect" type="varchar2" %>
+
+<%! CURSOR C IS
+	select DISTINCT SONGNAME
+	from SONGS
+	where UPPER(ARTIST) = UPPER(artistselect)
+
+	UNION
+
+	select DISTINCT HITSONG 
+	from HITSONGS
+	where UPPER(HITARTIST) = UPPER(artistselect); %>
+<%! i number := 0; %>
+<%! SONG VARCHAR(50); %>
+<% open C;
+   fetch C into SONG;
+   if C%notfound 
+   then %>
+    <meta http-equiv ="refresh"
+      content="0;url=http://prophet.njit.edu:7780/CS632S852_001/mysongs2err"/>
+   <% end if;
+   close C; %>
+
+<HTML>
+</HEAD>
+<TITLE> SONG INFORMATION SYSTEM </TITLE>
+</HEAD>
+
+<BODY>
+<Table width="100%">
+<TR><TD BGCOLOR=#FBB117 align=center valign=center><font face="verdana" size=5 color=green><B> SONGS</B></font> </TD></TR></TABLE>
+
+<font face="verdana" color=green>Name: Preeti Boddupally</font>
+<br>
+<font face="verdana" color=green>UCID: pb384</font>
+<br>
+<font face="verdana" color=green>New UserName: CS632S85001</font>
+<p>
+
+<TABLE>
+ <TR>
+  <TH BGCOLOR="728C00"><font face="verdana" color=#FFFFFF><B>Below the list of all songs of the artist <font color=#FBB117><%= artistselect %></font></B></font>
+  </TH>
+ </TR>
+ <TR>
+  <TABLE>
+<% for L in C
+   loop
+   i:=i +1; %>
+     <TR>
+      <TD><font face="verdana" color=#990012><%= i %></font></TD>
+      <TD><font face="verdana" color=#990012><%= L.SONGNAME %></font></TD>
+     </TR>
+<% end loop; %>
+  </TABLE>
+ </TR>
+</TABLE> 
+
+<p> 
+<FORM METHOD=POST ACTION="mysongs">
+<INPUT TYPE=SUBMIT VALUE="Back">
+</FORM>
+</BODY>
+</HTML>
+   
